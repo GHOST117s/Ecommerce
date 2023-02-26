@@ -1,12 +1,31 @@
 import React from 'react'
 import Link from 'next/link'
 import Navbar from './Components/Navbar'
-
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 const product = () => {
+  const router = useRouter();
+  const { product } = router.query;
+
+
+  useEffect(() => { 
+    const localProducts = JSON.parse(localStorage.getItem("products") || "[]");   
+    console.log(localProducts);
+
+    //match the product id with the product in local storage
+    const selectedProduct = localProducts.find(p => p.id === parseInt(product));  
+    console.log(selectedProduct);
+   
+  }, [product]);
+ 
+
+  
+
   return (
     <div>
         <Navbar/>   
+
 
         <h1>Product Page</h1>
         <section className="text-gray-600 body-font overflow-hidden">
@@ -23,11 +42,7 @@ const product = () => {
          
            
         </div>
-        {/* <div className="flex">
-          <span className="title-font font-medium text-2xl text-gray-900">₹15000</span>
-          <button className="flex ml-auto text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">Button</button>
-         
-        </div> */}
+       
       </div>
     </div>
   </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import NavbarSecondary from './Components/NavbarSecondary';
+import { Cookie } from 'next/font/google';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -19,6 +20,7 @@ const Login = () => {
     const user = users.find((user) => user.email === email && user.name === password);
     if (user) {
       localStorage.setItem('user', JSON.stringify(user));
+      Cookie.set('Logedin', true);
       router.push('/categories');
     } else {
       setError('Invalid email or password');

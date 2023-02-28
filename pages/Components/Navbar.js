@@ -21,7 +21,7 @@ const navbar = () => {
   function handleLogout() {
     // Remove the user from local storage
     localStorage.removeItem("user");
-  Cookie.remove("Logedin");
+
     router.push('/login');
 
 

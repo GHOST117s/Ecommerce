@@ -30,10 +30,20 @@
       "static/chunks/main.js",
       "static/chunks/pages/categories.js"
     ],
-    "/productList": [
+    "/login": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/productList.js"
+      "static/chunks/pages/login.js"
+    ],
+    "/userDetails": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/userDetails.js"
+    ],
+    "/variants": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/variants.js"
     ]
   },
   "ampFirstPages": []

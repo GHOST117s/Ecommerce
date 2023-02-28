@@ -20,7 +20,7 @@ const Login = () => {
     const user = users.find((user) => user.email === email && user.name === password);
     if (user) {
       localStorage.setItem('user', JSON.stringify(user));
-      Cookie.set('Logedin', true);
+      
       router.push('/categories');
     } else {
       setError('Invalid email or password');

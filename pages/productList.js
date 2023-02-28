@@ -59,8 +59,10 @@ const handleSubmit = (e) => {
       localStorage.getItem("products") || "[]"
     );
 
+    // Generate a unique id for the new product
+    const id = Date.now();
+
     // Check if product already exists in local storage
-    const id = selectedProduct ? selectedProduct.id : existingProducts.length + 1;
     const index = existingProducts.findIndex((product) => product.id === id);
 
     if (index !== -1) {
@@ -115,6 +117,7 @@ const handleSubmit = (e) => {
   };
 };
 
+
   
 
   useEffect(() => {
@@ -140,18 +143,29 @@ const handleSubmit = (e) => {
 
 //delete product from local storage and update state
 
-  function handleDelete(id) {
+function handleDelete(id) {
+  console.log(id,"clicked");
+  
+  // Retrieve existing products from local storage
+  const existingProducts = JSON.parse(
+    localStorage.getItem("products") || "[]"
+  );
 
-    console.log(id,"clicked");
-    const filteredProducts = products.filter((product) => product.id !== id);
-    localStorage.setItem("products", JSON.stringify(filteredProducts));
+  // Filter out the product with the matching id
+  const filteredProducts = existingProducts.filter((product) => product.id !== id);
 
-    setProducts(filteredProducts);
-  } 
+  // Save updated products array to local storage
+  localStorage.setItem("products", JSON.stringify(filteredProducts));
 
-
+  // Update products state variable
+  setProducts(filteredProducts);
+}
 
   console.log(category);
+
+  const user = localStorage.getItem("user") || "";
+  console.log(user);
+
 
   return (
     <div>
@@ -161,6 +175,7 @@ const handleSubmit = (e) => {
 
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
+          {user && (
           <div className="mb-6">
             <label
               htmlFor="large-input"
@@ -184,7 +199,7 @@ const handleSubmit = (e) => {
               />
             )}
           </div>
-
+          )}
           {/* //products */}
           <div className="flex flex-wrap -m-4">
             {products.map((product) => (
@@ -219,6 +234,7 @@ const handleSubmit = (e) => {
                     ></path>
                   </svg>
                 </Link>
+                {user && (
                 <button
                  onClick={() => handleEdit(product)}
                   className=" m-1 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -238,8 +254,9 @@ const handleSubmit = (e) => {
                     ></path>
                   </svg>
                 </button>
+                )}
               
-
+{user && (
                 <button
                   
                   className=" m-1 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"                 onClick={() => handleDelete(product.id)}
@@ -260,6 +277,8 @@ const handleSubmit = (e) => {
                     />
                   </svg>
                 </button>
+                )}
+                
               </div>
             </div>
             ))}
